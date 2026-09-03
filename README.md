@@ -4,7 +4,7 @@
 ![Platform](https://img.shields.io/badge/platform-Apple%20Silicon-black)
 ![Python](https://img.shields.io/badge/python-3.11%20%7C%203.12%20%7C%203.13-blue)
 ![License](https://img.shields.io/badge/license-Apache--2.0-green)
-[![PyPI](https://img.shields.io/pypi/v/opendde-mlx)](https://pypi.org/project/opendde-mlx/)
+[![PyPI](https://img.shields.io/pypi/v/opendde-mlx.svg?cacheSeconds=300)](https://pypi.org/project/opendde-mlx/)
 
 OpenDDE-MLX is a rewrite of [OpenDDE](https://github.com/aurekaresearch/OpenDDE),
 the open-source all-atom biomolecular co-folding model, on top of
