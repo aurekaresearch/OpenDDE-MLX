@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: Apache-2.0
 # Copyright (c) 2026 Aureka AI Research
-"""Console entry point: ``opendde {pred,json,msa,mt,prep,convert,doctor}``."""
+"""Console entry point: ``opendde-mlx {pred,json,msa,mt,prep,convert,doctor}``."""
 
 from __future__ import annotations
 
@@ -78,7 +78,7 @@ def convert(pt_path: str, output: str | None) -> None:
     click.echo(f"Saved {output}")
 
 
-@click.group(name="opendde", cls=LazyGroup, context_settings=CONTEXT_SETTINGS)
+@click.group(name="opendde-mlx", cls=LazyGroup, context_settings=CONTEXT_SETTINGS)
 @click.version_option(version=__version__)
 def opendde_cli() -> None:
     """OpenDDE-MLX: biomolecular co-folding on Apple Silicon."""

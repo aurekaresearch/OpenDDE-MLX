@@ -85,8 +85,8 @@ jobs:
               cd "${RUNNER_TEMP}"
               "${env_dir}/bin/python" -I -c \
                 "from importlib.resources import files; import opendde; assert opendde.__version__ == '${expected_version}'; assert files('opendde.config').joinpath('model_manifest.json').is_file()"
-              "${env_dir}/bin/opendde" --help >/dev/null
-              "${env_dir}/bin/opendde" doctor >/dev/null
+              "${env_dir}/bin/opendde-mlx" --help >/dev/null
+              "${env_dir}/bin/opendde-mlx" doctor >/dev/null
             )
           done
       - uses: actions/upload-artifact@v7

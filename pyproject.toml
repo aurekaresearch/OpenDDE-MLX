@@ -61,7 +61,7 @@ Changelog = "https://github.com/aurekaresearch/OpenDDE-MLX/blob/main/CHANGELOG.m
 Upstream = "https://github.com/aurekaresearch/OpenDDE"
 
 [project.scripts]
-opendde = "runner.cli:opendde_cli"
+opendde-mlx = "runner.cli:opendde_cli"
 
 [dependency-groups]
 dev = ["pytest>=8", "ruff>=0.6", "torch>=2.4"]

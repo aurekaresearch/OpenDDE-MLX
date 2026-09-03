@@ -35,13 +35,13 @@ RNA:
 
 ```bash
 # Protein MSA only
-opendde msa -i examples/input.json -o ./output
+opendde-mlx msa -i examples/input.json -o ./output
 
 # Protein MSA + template search
-opendde mt -i examples/input.json -o ./output
+opendde-mlx mt -i examples/input.json -o ./output
 
 # Protein MSA + template search + RNA MSA when RNA is present
-opendde prep -i examples/input.json -o ./output
+opendde-mlx prep -i examples/input.json -o ./output
 ```
 
 Generated JSON files are written under `<out_dir>/.opendde_preprocessed/<input-hash>/` rather than next to the
@@ -50,7 +50,7 @@ logs the generated path.
 
 ## Protein MSA
 
-`opendde msa` uses the public ColabFold MMseqs2 API
+`opendde-mlx msa` uses the public ColabFold MMseqs2 API
 (`https://api.colabfold.com`) unless MSA paths already exist. The service is
 shared and rate-limited; for batch runs, provide precomputed A3M files.
 
@@ -77,7 +77,7 @@ $OPENDDE_ROOT_DIR/search_database/pdb_seqres_2022_09_28.fasta
 Run with explicit tools/database if needed:
 
 ```bash
-opendde mt -i examples/input.json -o ./output \
+opendde-mlx mt -i examples/input.json -o ./output \
   --hmmsearch_binary_path /path/to/hmmsearch \
   --hmmbuild_binary_path /path/to/hmmbuild \
   --seqres_database_path /path/to/pdb_seqres_2022_09_28.fasta
@@ -93,7 +93,7 @@ RNA MSA uses HMMER (`nhmmer`, `hmmalign`, `hmmbuild`) against NT-RNA, Rfam, and
 RNAcentral databases.
 
 ```bash
-opendde prep -i my_rna_job.json -o ./output \
+opendde-mlx prep -i my_rna_job.json -o ./output \
   --nhmmer_binary_path /path/to/nhmmer \
   --hmmalign_binary_path /path/to/hmmalign \
   --hmmbuild_binary_path /path/to/hmmbuild

@@ -13,7 +13,7 @@ Exact parameter count: `655,791,538`, rounded to `656 M`.
 Use it with:
 
 ```bash
-opendde pred -i examples/input.json -o ./output -n opendde_v1
+opendde-mlx pred -i examples/input.json -o ./output -n opendde_v1
 ```
 
 Checkpoint path by default:
@@ -49,7 +49,7 @@ Recommended inference defaults:
 - `sample_diffusion.N_step = 200`
 - triangle kernels: `auto`
 
-These are also the current `opendde pred` CLI defaults for `opendde_v1`.
+These are also the current `opendde-mlx pred` CLI defaults for `opendde_v1`.
 
 Legacy `constraint` fields are ignored by the inference-only build. Use
 `covalent_bonds` for supported covalent links.

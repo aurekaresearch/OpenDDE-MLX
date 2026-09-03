@@ -3,7 +3,6 @@
 set -euo pipefail
 SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
 REPO_ROOT="$(cd -- "${SCRIPT_DIR}/.." && pwd)"
-DEFAULT_DATA_BASE_URL="https://aureka-s3-opendde.s3.us-west-2.amazonaws.com"
 DEFAULT_SEARCH_DATABASE_URL="https://storage.googleapis.com/alphafold-databases/v3.0"
 
 COMMON_FILES=(
@@ -21,7 +20,6 @@ SEARCH_DATABASE_FILES=(
 )
 
 OPENDDE_ROOT="${OPENDDE_ROOT_DIR:-}"
-DATA_BASE_URL="${OPENDDE_DATA_BASE_URL:-$DEFAULT_DATA_BASE_URL}"
 DEPENDENCY_URL="${OPENDDE_DEPENDENCY_URL:-}"
 COMMON_URL="${OPENDDE_COMMON_URL:-}"
 COMMON_URL_EXPLICIT=0
@@ -70,13 +68,10 @@ OPENDDE_ROOT_DIR:
 
   common/          CCD/cache metadata used by JSON parsing and featurization
   search_database/ Template and RNA-MSA search databases used by prep/mt
-  checkpoint/      Model checkpoint used by opendde pred
+  checkpoint/      Model checkpoint used by opendde-mlx pred
 
 Options:
   --root DIR                 Data root. Defaults to OPENDDE_ROOT_DIR.
-  --base-url URL             Bulk tarball root used only as a search database
-                             fallback. Defaults to OPENDDE_DATA_BASE_URL or
-                             ${DEFAULT_DATA_BASE_URL}.
   --dependency-url URL       Root for model checkpoint files. Defaults to
                              OPENDDE_DEPENDENCY_URL or the manifest source.
                              Also used for common files unless --common-url is set.
@@ -116,10 +111,6 @@ while [[ $# -gt 0 ]]; do
     case "$1" in
         --root)
             OPENDDE_ROOT="${2:-}"
-            shift 2
-            ;;
-        --base-url)
-            DATA_BASE_URL="${2:-}"
             shift 2
             ;;
         --dependency-url)
@@ -189,7 +180,6 @@ done
 
 [[ -n "$OPENDDE_ROOT" ]] || err "OPENDDE_ROOT_DIR is not set. Use --root DIR or export OPENDDE_ROOT_DIR=/path/to/data_root."
 if [[ "$DOWNLOAD_SEARCH_DATABASE" -eq 1 ]]; then
-    [[ -n "$DATA_BASE_URL" ]] || err "Data base URL must not be empty."
     [[ -n "$SEARCH_DATABASE_URL" ]] || err "Search database URL must not be empty."
 fi
 
@@ -234,7 +224,6 @@ if [[ "$DOWNLOAD_COMMON" -eq 1 ]]; then
     [[ -n "$COMMON_URL" ]] || err "Common URL must not be empty."
 fi
 
-DATA_BASE_URL="${DATA_BASE_URL%/}"
 DEPENDENCY_URL="${DEPENDENCY_URL%/}"
 COMMON_URL="${COMMON_URL%/}"
 SEARCH_DATABASE_URL="${SEARCH_DATABASE_URL%/}"
@@ -380,30 +369,6 @@ copy_or_download() {
     fi
 }
 
-try_download_and_extract_tarball() {
-    local tarball="$1"
-    local url="${DATA_BASE_URL}/${tarball}"
-    local dest="${OPENDDE_ROOT}/${tarball}"
-
-    if ! try_copy_or_download "$url" "$dest"; then
-        return 1
-    fi
-    info "Extracting $dest to $OPENDDE_ROOT"
-    if ! tar -xzf "$dest" -C "$OPENDDE_ROOT"; then
-        rm -f "$dest"
-        return 1
-    fi
-    rm -f "$dest" || return 1
-}
-
-download_and_extract_tarball() {
-    local tarball="$1"
-
-    if ! try_download_and_extract_tarball "$tarball"; then
-        err "Failed to download/extract ${DATA_BASE_URL}/${tarball}"
-    fi
-}
-
 download_files_from() {
     local base_url="$1"
     local subdir="$2"
@@ -455,10 +420,8 @@ if [[ "$DOWNLOAD_SEARCH_DATABASE" -eq 1 ]]; then
         info "Search databases already exist under ${OPENDDE_ROOT}/search_database"
     else
         info "Downloading search database files from ${SEARCH_DATABASE_URL}"
-        if ! download_files_from "$SEARCH_DATABASE_URL" "search_database" "${SEARCH_DATABASE_FILES[@]}"; then
-            warn "Search database files were not all available from ${SEARCH_DATABASE_URL}; trying ${DATA_BASE_URL}/search_database.tar.gz."
-            download_and_extract_tarball "search_database.tar.gz"
-        fi
+        download_files_from "$SEARCH_DATABASE_URL" "search_database" "${SEARCH_DATABASE_FILES[@]}" \
+            || err "Failed to download search database files from ${SEARCH_DATABASE_URL}"
     fi
 fi
 

@@ -18,7 +18,7 @@ Applies to the whole repository.
   `checkpoint.py` (`.pt` -> `.safetensors`, key remap, loading).
 - `opendde/data/`: NumPy featurisation pipeline (parsers, CCD, tokenizer, MSA, templates).
 - `opendde/config/`: defaults (`model_base.py`), typed schema, CLI merge engine.
-- `runner/`: Click CLI (`opendde`), inference runner, output dumper, MSA/template search.
+- `runner/`: Click CLI (`opendde-mlx`), inference runner, output dumper, MSA/template search.
 - `tests/parity/`: numerical parity against the upstream PyTorch implementation.
 
 ## Conventions
@@ -56,5 +56,5 @@ runs in the `aurekaresearch/OpenDDE-MLX` repository.
 ## Handoff checklist
 
 - Parity tests for every touched module pass; new modules get a reference dump + test.
-- `opendde pred -i examples/parity_small.json -o /tmp/out --use_msa false --cycle 2 --step 20 --sample 1` runs.
+- `opendde-mlx pred -i examples/parity_small.json -o /tmp/out --use_msa false --cycle 2 --step 20 --sample 1` runs.
 - No checkpoints, outputs or large files are committed.

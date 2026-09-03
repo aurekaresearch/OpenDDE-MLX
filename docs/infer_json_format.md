@@ -169,7 +169,7 @@ The inference-only build ignores legacy `constraint` fields. Use
 
 ## Output layout
 
-`opendde pred` writes:
+`opendde-mlx pred` writes:
 
 ```text
 <out_dir>/<job_name>/seed_<seed>/predictions/

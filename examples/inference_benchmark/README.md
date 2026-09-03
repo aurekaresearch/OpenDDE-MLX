@@ -67,7 +67,7 @@ request adding your JSON to `results/`.
 
 ### A full production run
 
-`opendde pred` defaults to **10 recycles, 200 diffusion steps and 5 samples**.
+`opendde-mlx pred` defaults to **10 recycles, 200 diffusion steps and 5 samples**.
 On MLX GPU fp16 that costs:
 
 | Chip | RAM | 100 residues | 200 residues | 300 residues |

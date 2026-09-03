@@ -9,7 +9,7 @@ runtime data setup, see [inference_instructions.md](./inference_instructions.md)
 Run commands from the repository root:
 
 ```bash
-opendde doctor
+opendde-mlx doctor
 export OPENDDE_ROOT_DIR=/path/to/opendde_data
 ```
 
@@ -45,7 +45,7 @@ This disables external features and keeps the standard step/cycle counts.
 Inference defaults to `bf16`; pass `--dtype fp32` for full precision:
 
 ```bash
-opendde pred \
+opendde-mlx pred \
   -i examples/input.json \
   -o ./output \
   -n opendde_v1 \
@@ -92,7 +92,7 @@ Entity keys include `proteinChain`, `dnaSequence`, `rnaSequence`, `ligand`, and
 Convert a PDB/CIF instead of writing JSON by hand:
 
 ```bash
-opendde json -i examples/7pzb.pdb -o ./output --altloc first
+opendde-mlx json -i examples/7pzb.pdb -o ./output --altloc first
 ```
 
 ## 4. Use precomputed MSA/template features
@@ -101,7 +101,7 @@ opendde json -i examples/7pzb.pdb -o ./output --altloc first
 already contains `pairedMsaPath`, `unpairedMsaPath`, and `templatesPath`:
 
 ```bash
-opendde pred \
+opendde-mlx pred \
   -i examples/examples_with_template/example_9fm7.json \
   -o ./output \
   -n opendde_v1 \
@@ -115,7 +115,7 @@ opendde pred \
 For an input without MSA/template paths:
 
 ```bash
-opendde prep -i examples/example_without_msa.json -o ./output
+opendde-mlx prep -i examples/example_without_msa.json -o ./output
 ```
 
 This writes the updated JSON under
@@ -123,7 +123,7 @@ This writes the updated JSON under
 and logs its path. Predict from that updated JSON:
 
 ```bash
-opendde pred \
+opendde-mlx pred \
   -i ./output/.opendde_preprocessed/<input-hash>/example_without_msa-final-updated.json \
   -o ./output \
   -n opendde_v1 \
@@ -132,8 +132,8 @@ opendde pred \
   --use_rna_msa false
 ```
 
-For protein MSA only, use `opendde msa`. For protein MSA + template only, use
-`opendde mt`.
+For protein MSA only, use `opendde-mlx msa`. For protein MSA + template only, use
+`opendde-mlx mt`.
 
 ## 6. RNA MSA example
 
@@ -141,14 +141,14 @@ For protein MSA only, use `opendde msa`. For protein MSA + template only, use
 contains a precomputed RNA MSA:
 
 ```bash
-opendde pred \
+opendde-mlx pred \
   -i examples/examples_with_rna_msa/example_9gmw_2.json \
   -o ./output \
   -n opendde_v1 \
   --use_rna_msa true
 ```
 
-To generate RNA MSA for your own RNA input, run `opendde prep` first.
+To generate RNA MSA for your own RNA input, run `opendde-mlx prep` first.
 
 ## More details
 

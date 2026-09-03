@@ -64,5 +64,5 @@ jobs:
         run: .venv/bin/python -m pytest tests -q -m "not network and not parity"
       - name: Smoke-test the CLI
         run: |
-          .venv/bin/opendde --help > /dev/null
-          .venv/bin/opendde doctor
+          .venv/bin/opendde-mlx --help > /dev/null
+          .venv/bin/opendde-mlx doctor

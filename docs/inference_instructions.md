@@ -1,7 +1,7 @@
 # Inference Instructions
 
 Reference for installing OpenDDE-MLX, preparing runtime data, and running the
-`opendde` commands on Apple Silicon.
+`opendde-mlx` commands on Apple Silicon.
 
 ## Install
 
@@ -10,7 +10,7 @@ From PyPI:
 ```bash
 uv venv --python 3.12
 uv pip install --python .venv opendde-mlx
-uv run --no-project --python .venv opendde doctor
+uv run --no-project --python .venv opendde-mlx doctor
 ```
 
 From source:
@@ -20,7 +20,7 @@ git clone git@github.com:aurekaresearch/OpenDDE-MLX.git
 cd OpenDDE-MLX
 uv venv --python 3.12
 uv pip install --python .venv -e .
-uv run --no-project --python .venv opendde doctor
+uv run --no-project --python .venv opendde-mlx doctor
 ```
 
 Requirements: macOS on Apple Silicon (M1 or newer), Python 3.11-3.13, MLX 0.30+.
@@ -38,19 +38,19 @@ $OPENDDE_ROOT_DIR/                      # default ~/.cache/opendde
 └── search_database/                    # local template / RNA-MSA search only
 ```
 
-`opendde pred` downloads the missing managed assets with size/SHA-256
+`opendde-mlx pred` downloads the missing managed assets with size/SHA-256
 verification. From a source checkout the upstream helper script still works:
 
 ```bash
 export OPENDDE_ROOT_DIR=/path/to/opendde_data
 bash scripts/download_opendde_data.sh --skip-search-database
-opendde convert $OPENDDE_ROOT_DIR/checkpoint/opendde.pt
+opendde-mlx convert $OPENDDE_ROOT_DIR/checkpoint/opendde.pt
 ```
 
 ## Prediction
 
 ```bash
-opendde pred -i examples/example_without_msa.json -o ./output --use_msa false
+opendde-mlx pred -i examples/example_without_msa.json -o ./output --use_msa false
 ```
 
 | Option                    | Default      | Meaning                                              |
@@ -117,6 +117,6 @@ kernel launches; `--fp32_diffusion false` gains about 15% per step.
 
 ## MSA, templates and RNA MSA
 
-See [msa_template_pipeline.md](./msa_template_pipeline.md). `opendde msa`,
-`opendde mt` and `opendde prep` are unchanged from upstream and require the
+See [msa_template_pipeline.md](./msa_template_pipeline.md). `opendde-mlx msa`,
+`opendde-mlx mt` and `opendde-mlx prep` are unchanged from upstream and require the
 same external tools (HMMER, Kalign) and databases.

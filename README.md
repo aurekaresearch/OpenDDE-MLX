@@ -57,7 +57,7 @@ uv pip install --python .venv -e .
 After either installation, verify the environment with:
 
 ```bash
-uv run --no-project --python .venv opendde doctor
+uv run --no-project --python .venv opendde-mlx doctor
 ```
 
 ## Model and runtime data
@@ -72,12 +72,12 @@ $OPENDDE_ROOT_DIR/
 └── search_database/                 # only for local template / RNA-MSA search
 ```
 
-`opendde pred` downloads the CCD assets and the released `opendde.pt` on first
+`opendde-mlx pred` downloads the CCD assets and the released `opendde.pt` on first
 use and converts it to `opendde.safetensors` (the conversion needs the
 `convert` extra). To convert an existing checkpoint explicitly:
 
 ```bash
-opendde convert ~/.cache/opendde/checkpoint/opendde.pt
+opendde-mlx convert ~/.cache/opendde/checkpoint/opendde.pt
 ```
 
 Released checkpoints (same as upstream):
@@ -90,7 +90,7 @@ Released checkpoints (same as upstream):
 ## Quick start
 
 ```bash
-opendde pred \
+opendde-mlx pred \
   -i examples/example_without_msa.json \
   -o ./output \
   --use_msa false
@@ -100,7 +100,7 @@ With MSA (uses the public ColabFold MMseqs2 server), an explicit dtype and a
 lighter schedule:
 
 ```bash
-opendde pred \
+opendde-mlx pred \
   -i examples/example.json \
   -o ./output \
   --dtype bf16 \
@@ -196,7 +196,7 @@ bf16 on the M3 Pro and fp16 on the M1 Max.
 ### A full production run
 
 The table above uses a reduced schedule to keep every cell comparable. This
-one is what you actually get from `opendde pred` with the shipped defaults:
+one is what you actually get from `opendde-mlx pred` with the shipped defaults:
 **10 recycles, 200 diffusion steps, 5 samples**, MLX GPU fp16.
 
 | Chip | RAM | 100 residues | 200 residues | 300 residues |

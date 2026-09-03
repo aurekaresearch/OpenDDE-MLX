@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: Apache-2.0
 # Copyright (c) 2026 Aureka AI Research
-"""Environment diagnostics for the ``opendde doctor`` command."""
+"""Environment diagnostics for the ``opendde-mlx doctor`` command."""
 
 from __future__ import annotations
 
@@ -84,5 +84,5 @@ def format_doctor_report() -> str:
     if os.path.isdir(checkpoint_dir):
         lines.append("Checkpoints: " + ", ".join(sorted(os.listdir(checkpoint_dir))))
     else:
-        lines.append("Checkpoints: none found (run `opendde pred` to download opendde.pt)")
+        lines.append("Checkpoints: none found (run `opendde-mlx pred` to download opendde.pt)")
     return "\n".join(lines)
