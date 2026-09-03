@@ -1,6 +1,10 @@
 {
   "schema_version": 1,
   "package": {
+    "name": "opendde-mlx",
+    "version": "0.1.0"
+  },
+  "upstream_package": {
     "name": "opendde",
     "version": "1.1.1"
   },
@@ -16,7 +20,7 @@
       "status": "supported",
       "parameter_count": 655791538,
       "data_cutoff": "2021-09-30",
-      "compatible_package_versions": ">=1.0.0,<2.0.0",
+      "compatible_package_versions": ">=0.1.0,<0.2.0",
       "default_checkpoint": "opendde.pt",
       "checkpoints": [
         {

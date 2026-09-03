@@ -7,6 +7,7 @@ python scripts/check_release.py --tag v0.1.0
 """
 
 import argparse
+import json
 import re
 import sys
 import tomllib
@@ -34,6 +35,16 @@ def check(tag: str) -> list[str]:
         errors.append(f"version is not a stable X.Y.Z release: {version}")
     if tag != f"v{version}":
         errors.append(f"tag {tag} does not match opendde/version.py ({version})")
+
+    try:
+        manifest = json.loads(
+            (ROOT / "opendde" / "config" / "model_manifest.json").read_text("utf-8")
+        )
+    except (OSError, json.JSONDecodeError) as exc:
+        errors.append(f"invalid model manifest: {exc}")
+    else:
+        if manifest.get("package") != {"name": "opendde-mlx", "version": version}:
+            errors.append("model manifest package does not match opendde-mlx version")
 
     pyproject = tomllib.loads((ROOT / "pyproject.toml").read_text("utf-8"))["project"]
     if pyproject["name"] != "opendde-mlx":
