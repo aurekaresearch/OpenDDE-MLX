@@ -1,0 +1,16 @@
+[
+ {
+  "name": "bench_100",
+  "sequences": [
+   {
+    "proteinChain": {
+     "sequence": "MGSSHHHHHHSQDPNSTTTAPPVELWTRDLGSCLHGTLATALIRDGHDPVTVLGAPWEFRRRPGAWSSEEYFFFAEPDSLAGRLALYHPFESTWHRSDGD",
+     "count": 1
+    }
+   }
+  ],
+  "modelSeeds": [
+   42
+  ]
+ }
+]

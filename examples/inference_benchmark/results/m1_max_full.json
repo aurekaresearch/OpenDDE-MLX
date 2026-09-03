@@ -1,0 +1,46 @@
+{
+  "machine": "Apple M1 Max, 32 GB",
+  "seed": 42,
+  "settings": "cycle=10 step=200 sample=5 use_msa=false",
+  "results": [
+    {
+      "backend": "mlx",
+      "dtype": "fp16",
+      "n_token": 100,
+      "forward_s": 44.8,
+      "memory_kind": "gpu",
+      "peak_gb": 3.1,
+      "wall_s": 53.3,
+      "plddt": 51.5257,
+      "ptm": 0.2849,
+      "ranking_score": 0.057,
+      "status": "ok"
+    },
+    {
+      "backend": "mlx",
+      "dtype": "fp16",
+      "n_token": 200,
+      "forward_s": 111.9,
+      "memory_kind": "gpu",
+      "peak_gb": 5.1,
+      "wall_s": 119.9,
+      "plddt": 42.2738,
+      "ptm": 0.3519,
+      "ranking_score": 0.0704,
+      "status": "ok"
+    },
+    {
+      "backend": "mlx",
+      "dtype": "fp16",
+      "n_token": 300,
+      "forward_s": 218.5,
+      "memory_kind": "gpu",
+      "peak_gb": 6.8,
+      "wall_s": 226.6,
+      "plddt": 43.011,
+      "ptm": 0.3529,
+      "ranking_score": 0.0706,
+      "status": "ok"
+    }
+  ]
+}

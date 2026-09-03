@@ -1,0 +1,46 @@
+{
+  "machine": "Apple M3 Pro, 36 GB",
+  "seed": 42,
+  "settings": "cycle=10 step=200 sample=5 use_msa=false",
+  "results": [
+    {
+      "backend": "mlx",
+      "dtype": "fp16",
+      "n_token": 100,
+      "forward_s": 53.4,
+      "memory_kind": "gpu",
+      "peak_gb": 3.1,
+      "wall_s": 58.3,
+      "plddt": 50.5749,
+      "ptm": 0.2906,
+      "ranking_score": 0.0581,
+      "status": "ok"
+    },
+    {
+      "backend": "mlx",
+      "dtype": "fp16",
+      "n_token": 200,
+      "forward_s": 156.7,
+      "memory_kind": "gpu",
+      "peak_gb": 5.1,
+      "wall_s": 162.0,
+      "plddt": 44.6064,
+      "ptm": 0.3797,
+      "ranking_score": 0.0759,
+      "status": "ok"
+    },
+    {
+      "backend": "mlx",
+      "dtype": "fp16",
+      "n_token": 300,
+      "forward_s": 315.3,
+      "memory_kind": "gpu",
+      "peak_gb": 6.8,
+      "wall_s": 321.2,
+      "plddt": 43.1481,
+      "ptm": 0.3547,
+      "ranking_score": 0.0709,
+      "status": "ok"
+    }
+  ]
+}
